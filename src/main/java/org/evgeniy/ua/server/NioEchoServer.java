@@ -1,4 +1,4 @@
-package org.evgeniy.ua;
+package org.evgeniy.ua.server;
 
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -10,10 +10,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
-public class NioEchoServer {
-
-    private static final String WELCOME_MESSAGE_TEMPLATE = "Hello %1s client\r\n";
-    private static final String READ_DATA_MESSAGE_TEMPLATE = "Server reads : %1s\r\n";
+public class NioEchoServer implements Server {
 
     // Use the same byte buffer for all channels. A single thread is
     // servicing all the channels, so no danger of concurrent access.
@@ -25,6 +22,7 @@ public class NioEchoServer {
         this.port = port;
     }
 
+    @Override
     public void start() throws Exception {
         //create socket channel, selector, bind server on port and register in selector
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();

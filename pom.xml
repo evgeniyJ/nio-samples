@@ -8,6 +8,14 @@
     <artifactId>nio-samples</artifactId>
     <version>0.0.1</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.18.Final</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <!-- Setting java version -->

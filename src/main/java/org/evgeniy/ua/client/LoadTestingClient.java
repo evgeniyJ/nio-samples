@@ -1,4 +1,6 @@
-package org.evgeniy.ua;
+package org.evgeniy.ua.client;
+
+import org.evgeniy.ua.Main;
 
 import java.io.IOException;
 import java.net.Socket;
