@@ -1,11 +1,9 @@
-package org.evgeniy.ua;
-
-import org.evgeniy.ua.server.Server;
+package org.evgeniy.ua.server;
 
 public class Main {
 
     private static final String DEFAULT_SERVER = "nio";
-    public static final int DEFAULT_PORT = 1234;
+    private static final int DEFAULT_PORT = 1234;
 
     public static void main(String[] args) throws Exception {
         String server = DEFAULT_SERVER;
