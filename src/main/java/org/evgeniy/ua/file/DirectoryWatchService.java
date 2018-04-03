@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class DirectoryWatchService {
 
+    private static final String DEFAULT_DIRECTORY = "D:\\test";
+
     private final String path;
 
     public DirectoryWatchService(String path) {
@@ -44,5 +46,14 @@ public class DirectoryWatchService {
         }
         final Path filename = (Path) watchEvent.context();
         System.out.println(kind + " -> " + filename);
+    }
+
+    public static void monitor(String[] args) {
+        String path = DEFAULT_DIRECTORY;
+        if (args.length > 0) {
+            path = args[0];
+        }
+        System.out.println("Starting monitor directory : " + path);
+        new DirectoryWatchService(path).monitor();
     }
 }

@@ -10,13 +10,13 @@ public class LoadTestingClient {
 
     private static final int DEFAULT_PORT = 4567;
 
-    public static void main(String[] args) {
+    public static void start(String[] args) {
         int port = DEFAULT_PORT;
         if (args.length > 0) {
             port = Integer.valueOf(args[0]);
         }
         List<Socket> sockets = new ArrayList<>();
-        System.out.println("Opening sockets...");
+        System.out.println("Opening sockets for server on port " + port + "...");
         for (int i = 0; i < 10_000; i++) {
             try {
                 sockets.add(new Socket("localhost", port));
