@@ -11,7 +11,7 @@ public interface Server {
 
     void start() throws Exception;
 
-    static void run(String[] args) throws Exception {
+    static void run(String[] args) {
         String server = DEFAULT_SERVER;
         int port = DEFAULT_PORT;
         if (args.length > 1) {
@@ -19,7 +19,11 @@ public interface Server {
             port = Integer.parseInt(args[1]);
         }
         System.out.println(String.format("Starting server : %1s on port : %2s", server, port));
-        Server.provide(server, port).start();
+        try {
+            Server.provide(server, port).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     static Server provide(String name, int port) {
