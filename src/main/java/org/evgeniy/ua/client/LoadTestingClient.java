@@ -1,5 +1,7 @@
 package org.evgeniy.ua.client;
 
+import org.evgeniy.ua.util.ProgramArgumentsUtil;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,10 +13,7 @@ public class LoadTestingClient {
     private static final int DEFAULT_PORT = 4567;
 
     public static void start(String[] args) {
-        int port = DEFAULT_PORT;
-        if (args.length > 0) {
-            port = Integer.valueOf(args[0]);
-        }
+        int port = ProgramArgumentsUtil.extract(args, 1, Integer::valueOf, DEFAULT_PORT);
         List<Socket> sockets = new ArrayList<>();
         System.out.println("Opening sockets for server on port " + port + "...");
         for (int i = 0; i < 10_000; i++) {

@@ -1,5 +1,7 @@
 package org.evgeniy.ua.server;
 
+import org.evgeniy.ua.util.ProgramArgumentsUtil;
+
 @FunctionalInterface
 public interface Server {
 
@@ -12,12 +14,8 @@ public interface Server {
     void start() throws Exception;
 
     static void run(String[] args) {
-        String server = DEFAULT_SERVER;
-        int port = DEFAULT_PORT;
-        if (args.length > 1) {
-            server = args[0];
-            port = Integer.parseInt(args[1]);
-        }
+        String server = ProgramArgumentsUtil.extract(args, 1, DEFAULT_SERVER);
+        int port = ProgramArgumentsUtil.extract(args, 2, Integer::valueOf, DEFAULT_PORT);
         System.out.println(String.format("Starting server : %1s on port : %2s", server, port));
         try {
             Server.provide(server, port).start();

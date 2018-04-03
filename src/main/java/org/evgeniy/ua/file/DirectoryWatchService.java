@@ -1,5 +1,7 @@
 package org.evgeniy.ua.file;
 
+import org.evgeniy.ua.util.ProgramArgumentsUtil;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Objects;
@@ -49,10 +51,7 @@ public class DirectoryWatchService {
     }
 
     public static void monitor(String[] args) {
-        String path = DEFAULT_DIRECTORY;
-        if (args.length > 0) {
-            path = args[0];
-        }
+        String path = ProgramArgumentsUtil.extract(args, 1, DEFAULT_DIRECTORY);
         System.out.println("Starting monitor directory : " + path);
         new DirectoryWatchService(path).monitor();
     }
