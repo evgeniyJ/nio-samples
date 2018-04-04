@@ -10,7 +10,7 @@ DirectoryWatchService - simple usage of Watch Service API. Class which monitors 
 
 You can play with generated jar file. Follow next steps :
  - Run maven command : "mvn clean install" to build executable jar file;
- - Execute : "java -jar target/nio-samples.jar <args>", where args could be next keywords :
+ - Execute : "java -jar target/nio-samples.jar args", where args could be next keywords :
     - "server nio 8888" for NioEchoServer on port 8888;
     - "server netty 7777" for NioEchoServer on port 7777;
     - "client 7777" for LoadTestingClient and server runs on local machine on port 7777;
