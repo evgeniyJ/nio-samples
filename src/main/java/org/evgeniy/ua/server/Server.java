@@ -28,6 +28,8 @@ public interface Server {
         switch (name) {
             case "netty":
                 return new NettyEchoServer(port);
+            case "nio2":
+                return new Nio2EchoServer(port);
             case "nio":
             default:
                 return new NioEchoServer(port);
