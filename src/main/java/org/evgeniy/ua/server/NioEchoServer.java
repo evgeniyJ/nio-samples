@@ -91,6 +91,7 @@ public class NioEchoServer implements Server {
             String clientMessage = StandardCharsets.UTF_8.decode(buffer).toString();
             String response = String.format(READ_DATA_MESSAGE_TEMPLATE, clientMessage);
             ByteBuffer bb = ByteBuffer.wrap(response.getBytes());
+            // Send the data; don't assume it goes all at once
             while (bb.hasRemaining()) {
                 channel.write(bb);
             }
