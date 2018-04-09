@@ -1,13 +1,11 @@
 package org.evgeniy.ua.server;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.ExecutionException;
 
 public class Nio2EchoServer implements Server {
 
@@ -53,27 +51,49 @@ public class Nio2EchoServer implements Server {
             ByteBuffer buffer = ByteBuffer.allocateDirect(1024);
             buffer.put(String.format(WELCOME_MESSAGE_TEMPLATE, client.getRemoteAddress()).getBytes());
             buffer.flip();
-            client.write(buffer).get();
-            buffer.clear();
-            while (client.read(buffer).get() != -1) {
+            client.write(buffer, null, new CompletionHandler<Integer, Object>() {
+                @Override
+                public void completed(Integer result, Object attachment) {
+                    buffer.clear();
+                    doRead(client, buffer);
+                }
+
+                @Override
+                public void failed(Throwable exc, Object attachment) {
+                    exc.printStackTrace();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void doRead(AsynchronousSocketChannel client, ByteBuffer buffer) {
+        client.read(buffer, null, new CompletionHandler<Integer, Object>() {
+            @Override
+            public void completed(Integer result, Object attachment) {
                 buffer.flip();
                 String clientMessage = StandardCharsets.UTF_8.decode(buffer).toString();
                 String response = String.format(READ_DATA_MESSAGE_TEMPLATE, clientMessage);
                 ByteBuffer bb = ByteBuffer.wrap(response.getBytes());
-                // Send the data; don't assume it goes all at once
-                while (bb.hasRemaining()) {
-                    client.write(bb).get();
-                }
                 buffer.clear();
+                client.write(bb, null, new CompletionHandler<Integer, Object>() {
+                    @Override
+                    public void completed(Integer result, Object attachment) {
+                        doRead(client, buffer);
+                    }
+
+                    @Override
+                    public void failed(Throwable exc, Object attachment) {
+                        exc.printStackTrace();
+                    }
+                });
             }
-        } catch (IOException | InterruptedException | ExecutionException ex) {
-            System.err.println(ex);
-        } finally {
-            try {
-                client.close();
-            } catch (IOException e) {
-                System.err.println(e);
+
+            @Override
+            public void failed(Throwable exc, Object attachment) {
+                exc.printStackTrace();
             }
-        }
+        });
     }
 }
