@@ -11,6 +11,11 @@ public interface Server {
     String WELCOME_MESSAGE_TEMPLATE = "Hello %1s client\r\n";
     String READ_DATA_MESSAGE_TEMPLATE = "Server reads : %1s\r\n";
 
+    /**
+     * Starts TCP/IP server
+     *
+     * @throws Exception in case of network errors
+     */
     void start() throws Exception;
 
     static void run(String[] args) {
