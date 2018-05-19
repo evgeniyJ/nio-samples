@@ -1,14 +1,14 @@
 # Samples with Java NIO library
 
-NioEchoServer - simple TCP/IP server, which consumes data from client and writes into socket corresponding messages.
+[NioEchoServer](https://github.com/evgeniyJ/nio-samples/blob/master/src/main/java/org/evgeniy/ua/server/NioEchoServer.java) - simple TCP/IP server, which consumes data from client and writes into socket corresponding messages.
 
-NettyEchoServer - same echo server but using Netty framework.
+[NettyEchoServer](https://github.com/evgeniyJ/nio-samples/blob/master/src/main/java/org/evgeniy/ua/server/NettyEchoServer.java) - same echo server but using Netty framework.
 
-Nio2EchoServer - same echo server but using NIO2 async channel.
+[Nio2EchoServer](https://github.com/evgeniyJ/nio-samples/blob/master/src/main/java/org/evgeniy/ua/server/Nio2EchoServer.java) - same echo server but using NIO2 async channel.
 
-LoadTestingClient - class, which creates 10000 client connections, you can test load on your nio server.
+[LoadTestingClient](https://github.com/evgeniyJ/nio-samples/blob/master/src/main/java/org/evgeniy/ua/client/LoadTestingClient.java) - class, which creates 10000 client connections, you can test load on your nio server.
 
-DirectoryWatchService - simple usage of Watch Service API. Class which monitors changes in predefined directory.
+[DirectoryWatchService](https://github.com/evgeniyJ/nio-samples/blob/master/src/main/java/org/evgeniy/ua/file/DirectoryWatchService.java) - simple usage of Watch Service API. Class which monitors changes in predefined directory.
 
 You can play with generated jar file. Follow next steps :
  - Run maven command : "mvn clean install" to build executable jar file;
